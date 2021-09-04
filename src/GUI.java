@@ -55,6 +55,8 @@ public class GUI extends JFrame implements ActionListener {
     public static void main(String[] args) {
         JFrame frame = new GUI("Pomodoro Timer");
         frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setBounds(400,400,400,400);
 
 
     }
@@ -65,10 +67,10 @@ public class GUI extends JFrame implements ActionListener {
             if (timerStarted) {
                 stop();
                 timerStarted = false;
-                startButton.setText("Start");
+                startButton.setText("START");
             } else {
                 start();
-                startButton.setText("Stop");
+                startButton.setText("STOP");
                 timerStarted = true;
 
             }
@@ -106,8 +108,8 @@ public class GUI extends JFrame implements ActionListener {
         timerStarted = false;
         time = 3000000;
         clock.setText("50:00");
-        startButton.setText("Start");
-        pauseButton.setText("Pause");
+        startButton.setText("START");
+        pauseButton.setText("PAUSE");
         pause = false;
     }
 
