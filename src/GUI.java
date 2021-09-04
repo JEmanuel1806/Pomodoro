@@ -10,12 +10,15 @@ public class GUI extends JFrame implements ActionListener {
     private JButton resetButton;
     private JLabel clock;
     private JButton pauseButton;
+    private JButton exitButton;
+    private JLabel roundLabel;
     public boolean timerStarted = false;
 
     public int seconds;
     public int minutes;
     public int time = 3000000;
     public boolean pause = false;
+    public int round;
 
 
     ActionListener counter = new ActionListener() {
@@ -24,10 +27,20 @@ public class GUI extends JFrame implements ActionListener {
             seconds = (time / 1000) % 60;
             minutes = (time / 60000) % 60;
             clock.setText(minutes + ":" + seconds);
+            //Work ends, Pause starts
             if (time == 0 && !pause) {
-                time = 600000;
-            } else if (time == 0 && pause) {
+                round = round + 1;
+                roundLabel.setText("Round: " + round);
+                if (round == 4){
+                    time = 3600000;
+                    round = 0;}
+                else
+                    time = 600000;
+            }
+            //Pause ends, Work starts
+            else if (time == 0 && pause) {
                 time = 3000000;
+
             }
 
         }
@@ -48,15 +61,26 @@ public class GUI extends JFrame implements ActionListener {
         this.startButton.addActionListener(this);
         this.resetButton.addActionListener(this);
         this.pauseButton.addActionListener(this);
+        this.exitButton.addActionListener(this);
 
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == exitButton)
+                    System.exit(0);
+            }
+        });
     }
 
 
     public static void main(String[] args) {
         JFrame frame = new GUI("Pomodoro Timer");
-        frame.setVisible(true);
         frame.setResizable(false);
-        frame.setBounds(400,400,400,400);
+        frame.setBounds(300, 300, 300, 300);
+
+        frame.dispose();
+        frame.setUndecorated(true);
+        frame.setVisible(true);
 
 
     }
@@ -79,14 +103,14 @@ public class GUI extends JFrame implements ActionListener {
         if (e.getSource() == resetButton) {
             reset();
         }
-        if(e.getSource() == pauseButton){
-            if(pause == false){
+        if (e.getSource() == pauseButton) {
+            if (pause == false) {
                 clock.setText("10:00");
                 time = 600000;
                 pauseButton.setText("WORK");
                 pause = true;
-            }
-            else if(pause == true){
+            } else if (pause == true) {
+                clock.setText("50:00");
                 time = 3000000;
                 pauseButton.setText("START");
                 pause = false;
@@ -107,6 +131,7 @@ public class GUI extends JFrame implements ActionListener {
         timer.stop();
         timerStarted = false;
         time = 3000000;
+        round = 0;
         clock.setText("50:00");
         startButton.setText("START");
         pauseButton.setText("PAUSE");
