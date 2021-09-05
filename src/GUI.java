@@ -1,6 +1,12 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class GUI extends JFrame implements ActionListener {
@@ -10,7 +16,6 @@ public class GUI extends JFrame implements ActionListener {
     private JButton resetButton;
     private JLabel clock;
     private JButton pauseButton;
-    private JButton exitButton;
     private JLabel roundLabel;
     private JLabel status;
     private JCheckBox autoStart;
@@ -31,22 +36,38 @@ public class GUI extends JFrame implements ActionListener {
             clock.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
             //Work ends, Pause starts
             if (time == 0 && !pause) {
-                if (round == 4){
+                if (round == 4) {
                     time = 3600000;
-                    round = 0;}
-                else
+                    round = 0;
+                } else
                     time = 600000;
             }
             //Pause ends, Work starts
             else if (time == 0 && pause) {
                 round = round + 1;
-                roundLabel.setText("Round: " + round+ "/4");
+                roundLabel.setText("Round: " + round + "/4");
                 time = 3000000;
 
             }
 
         }
     };
+
+    public void playSound(String soundName)
+    {
+        try
+        {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace( );
+        }
+    }
 
 
     Timer timer = new Timer(1000, counter);
@@ -63,21 +84,14 @@ public class GUI extends JFrame implements ActionListener {
         this.startButton.addActionListener(this);
         this.resetButton.addActionListener(this);
         this.pauseButton.addActionListener(this);
-        this.exitButton.addActionListener(this);
+
 
         this.autoStart.addActionListener(this);
 
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == exitButton)
-                    System.exit(0);
-            }
-        });
         autoStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource()==autoStart) {
+                if (e.getSource() == autoStart) {
                     if (time == 0) {
                         System.out.println("Test");
                         timer.stop();
@@ -91,10 +105,8 @@ public class GUI extends JFrame implements ActionListener {
     public static void main(String[] args) {
         JFrame frame = new GUI("Pomodoro Timer");
         frame.setResizable(false);
-        frame.setBounds(300, 300, 400, 400);
+        frame.setBounds(300, 300, 300, 400);
 
-        frame.dispose();
-        frame.setUndecorated(true);
         frame.setVisible(true);
 
 
@@ -105,11 +117,13 @@ public class GUI extends JFrame implements ActionListener {
         if (e.getSource() == startButton) {
             if (timerStarted) {
                 stop();
+                playSound("time_up.wav");
                 status.setText("");
                 timerStarted = false;
                 startButton.setText("START");
             } else {
                 start();
+                playSound("timer_start.wav");
                 status.setText("Working hard...:)");
                 startButton.setText("STOP ");
                 timerStarted = true;
@@ -131,7 +145,7 @@ public class GUI extends JFrame implements ActionListener {
                 status.setText("Working hard...");
                 clock.setText("50:00");
                 time = 3000000;
-                pauseButton.setText("START");
+                pauseButton.setText("BREAK");
                 pause = false;
             }
         }
@@ -154,7 +168,7 @@ public class GUI extends JFrame implements ActionListener {
         round = 0;
         clock.setText("50:00");
         startButton.setText("START");
-        pauseButton.setText("PAUSE");
+        pauseButton.setText("BREAK");
         pause = false;
     }
 

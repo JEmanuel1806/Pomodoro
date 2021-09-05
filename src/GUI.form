@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="9" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="50" y="41" width="516" height="288"/>
+      <xy x="50" y="41" width="282" height="359"/>
     </constraints>
     <properties>
       <background color="-16777216"/>
@@ -14,19 +14,11 @@
       <font/>
     </border>
     <children>
-      <component id="fc4c2" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="LEMON MILK Light" size="14" style="0"/>
-          <foreground color="-1247233"/>
-          <text value="Pomodoro Timer"/>
-        </properties>
-      </component>
       <component id="96793" class="javax.swing.JButton" binding="startButton" default-binding="true">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="4" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="78" height="19"/>
+          </grid>
         </constraints>
         <properties>
           <background color="-6405413"/>
@@ -41,54 +33,9 @@
           <verticalAlignment value="0"/>
         </properties>
       </component>
-      <component id="f78" class="javax.swing.JButton" binding="exitButton">
-        <constraints>
-          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-16777216"/>
-          <borderPainted value="false"/>
-          <contentAreaFilled value="false"/>
-          <enabled value="true"/>
-          <focusPainted value="false"/>
-          <focusable value="false"/>
-          <font name="Source Code Pro" size="22" style="1"/>
-          <foreground color="-6405413"/>
-          <hideActionText value="false"/>
-          <horizontalAlignment value="4"/>
-          <opaque value="true"/>
-          <selected value="false"/>
-          <text value="X"/>
-          <visible value="true"/>
-        </properties>
-      </component>
-      <component id="5a3e5" class="javax.swing.JLabel" binding="status">
-        <constraints>
-          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-1247233"/>
-          <font name="LEMON MILK Light" size="12" style="0"/>
-          <foreground color="-9539987"/>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="95a38" class="javax.swing.JLabel" binding="roundLabel">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <focusable value="false"/>
-          <font name="LEMON MILK Light" size="14" style="0"/>
-          <foreground color="-6405413"/>
-          <opaque value="false"/>
-          <text value="Round: 1/4"/>
-          <verticalTextPosition value="0"/>
-        </properties>
-      </component>
       <component id="74727" class="javax.swing.JButton" binding="resetButton">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="4" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-6405413"/>
@@ -103,20 +50,22 @@
       </component>
       <component id="b9e38" class="javax.swing.JButton" binding="pauseButton">
         <constraints>
-          <grid row="5" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <actionCommand value="BREAK:)"/>
           <background color="-6405413"/>
           <contentAreaFilled value="false"/>
           <focusable value="false"/>
           <font name="LEMON MILK Light" style="0"/>
           <foreground color="-1247233"/>
-          <text value="BREAK :)"/>
+          <label value="BREAK "/>
+          <text value="BREAK "/>
         </properties>
       </component>
       <component id="10923" class="javax.swing.JCheckBox" binding="autoStart">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="10" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <contentAreaFilled value="false"/>
@@ -129,9 +78,33 @@
           <verticalTextPosition value="0"/>
         </properties>
       </component>
+      <component id="5a3e5" class="javax.swing.JLabel" binding="status">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-1247233"/>
+          <font name="LEMON MILK Light" size="12" style="0"/>
+          <foreground color="-9539987"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="95a38" class="javax.swing.JLabel" binding="roundLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <focusable value="false"/>
+          <font name="LEMON MILK Light" size="14" style="0"/>
+          <foreground color="-6405413"/>
+          <opaque value="false"/>
+          <text value="Round: 1/4"/>
+          <verticalTextPosition value="0"/>
+        </properties>
+      </component>
       <component id="8ad6" class="javax.swing.JLabel" binding="clock">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="8" vsize-policy="4" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="4" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="145" height="64"/>
           </grid>
         </constraints>
@@ -143,6 +116,16 @@
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
           <text value="50:00"/>
+        </properties>
+      </component>
+      <component id="fc4c2" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="LEMON MILK Light" size="14" style="0"/>
+          <foreground color="-1247233"/>
+          <text value="Pomodoro Timer"/>
         </properties>
       </component>
     </children>
