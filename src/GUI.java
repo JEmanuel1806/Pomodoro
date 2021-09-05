@@ -28,7 +28,7 @@ public class GUI extends JFrame implements ActionListener {
             time = time - 1000;
             seconds = (time / 1000) % 60;
             minutes = (time / 60000) % 60;
-            clock.setText(minutes + ":" + seconds);
+            clock.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
             //Work ends, Pause starts
             if (time == 0 && !pause) {
                 if (round == 4){
