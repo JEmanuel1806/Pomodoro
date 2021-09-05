@@ -36,6 +36,7 @@ public class GUI extends JFrame implements ActionListener {
             clock.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
             //Work ends, Pause starts
             if (time == 0 && !pause) {
+                playSound("time_up.wav");
                 if (round == 4) {
                     time = 3600000;
                     round = 0;
@@ -44,6 +45,7 @@ public class GUI extends JFrame implements ActionListener {
             }
             //Pause ends, Work starts
             else if (time == 0 && pause) {
+                playSound("timer_start.wav");
                 round = round + 1;
                 roundLabel.setText("Round: " + round + "/4");
                 time = 3000000;
@@ -136,12 +138,14 @@ public class GUI extends JFrame implements ActionListener {
         }
         if (e.getSource() == pauseButton) {
             if (pause == false) {
+                playSound("time_up.wav");
                 status.setText("relax a bit...");
                 clock.setText("10:00");
                 time = 600000;
                 pauseButton.setText("WORK");
                 pause = true;
             } else if (pause == true) {
+                playSound("timer_start.wav");
                 status.setText("Working hard...");
                 clock.setText("50:00");
                 time = 3000000;
@@ -161,6 +165,7 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public void reset() {
+        playSound("timer_reset.wav");
         status.setText("");
         timer.stop();
         timerStarted = false;
