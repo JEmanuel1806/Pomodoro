@@ -4,9 +4,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class GUI extends JFrame implements ActionListener {
@@ -28,6 +26,7 @@ public class GUI extends JFrame implements ActionListener {
     public int round;
 
 
+    // Handles timer start and stop
     ActionListener counter = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             time = time - 1000;
@@ -55,22 +54,6 @@ public class GUI extends JFrame implements ActionListener {
         }
     };
 
-    public void playSound(String soundName)
-    {
-        try
-        {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-        }
-        catch(Exception ex)
-        {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace( );
-        }
-    }
-
 
     Timer timer = new Timer(1000, counter);
 
@@ -88,6 +71,8 @@ public class GUI extends JFrame implements ActionListener {
         this.pauseButton.addActionListener(this);
 
 
+        // Autostart
+
         this.autoStart.addActionListener(this);
 
         autoStart.addActionListener(new ActionListener() {
@@ -95,7 +80,10 @@ public class GUI extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == autoStart) {
                     if (time == 0) {
-                        System.out.println("Test");
+                        timer.start();
+                    }
+                } else {
+                    if (time == 0) {
                         timer.stop();
                     }
                 }
@@ -126,7 +114,7 @@ public class GUI extends JFrame implements ActionListener {
             } else {
                 start();
                 playSound("timer_start.wav");
-                status.setText("Working hard...:)");
+                status.setText("Working hard...");
                 startButton.setText("STOP ");
                 timerStarted = true;
 
@@ -175,6 +163,19 @@ public class GUI extends JFrame implements ActionListener {
         startButton.setText("START");
         pauseButton.setText("BREAK");
         pause = false;
+    }
+
+    // Sound
+    public void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
     }
 
 
